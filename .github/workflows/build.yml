@@ -123,7 +123,6 @@ jobs:
           path: |
             ${{github.workspace}}/libspng/build/include/*.h
             ${{github.workspace}}/libspng/build/libspng.a
-
   centijson-mingw32:
     runs-on: ubuntu-latest
     steps:
@@ -173,6 +172,10 @@ jobs:
           repository: cosinekitty/astronomy
           ref: master
           path: astronomy
+      - name: Apply patches
+        run: |
+          cd ${{github.workspace}}/astronomy && git apply ${{github.workspace}}/astronomy-356.patch
+          cd ${{github.workspace}}/astronomy && git apply ${{github.workspace}}/astronomy-357.patch
       - name: Build
         run: |
           mkdir -p ${{github.workspace}}/astronomy/build
